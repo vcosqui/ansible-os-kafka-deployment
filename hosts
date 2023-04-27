@@ -1,0 +1,12 @@
+[all:vars]
+zookeeper_servers_use_inventory_hostname = true
+
+[kafka_nodes]
+kafka_1 kafka_broker_id=1 ansible_host=10.1.0.7
+kafka_2 kafka_broker_id=2 ansible_host=10.1.0.5
+kafka_3 kafka_broker_id=3 ansible_host=10.1.0.6
+
+[zookeeper_nodes]
+zookeeper_1 zookeeper_id=1 ansible_host=10.1.0.9
+zookeeper_2 zookeeper_id=2 ansible_host=10.1.0.8
+zookeeper_3 zookeeper_id=3 ansible_host=10.1.0.4

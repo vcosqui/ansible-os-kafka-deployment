@@ -1,0 +1,22 @@
+- hosts: zookeeper_nodes
+  become: yes
+  pre_tasks:
+    - name: Install Java 11 (OpenJDK)
+      apt:
+        pkg:
+          - openjdk-11-jre-headless
+        state: present
+        update_cache: yes
+    - name: Build hosts file
+      lineinfile:
+        dest: /etc/hosts
+        regexp: '.*{{ item }}$'
+        line: '{{ hostvars[item].ansible_host }} {{item}}'
+        state: present
+      with_items: '{{ groups["zookeeper_nodes"] }}'
+  roles:
+    - role: sleighzy.zookeeper
+      zookeeper_servers:
+        - zookeeper_1
+        - zookeeper_2
+        - zookeeper_3
