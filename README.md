@@ -11,6 +11,10 @@ apt-add-repository ppa:ansible/ansible
 apt update
 apt install ansible
 ```
+* Kafkacat cli tool to test
+```shell
+apt install kafkacat
+```
 
 ## Instructions
 1. Edit `hosts` file to put the right ip address of your inventory.
@@ -26,4 +30,13 @@ make install-zookeeper
 5. Test Zookeeper cluster status with command
 ```shell
 make test-zookeeper
+```
+6. Install Kafka cluster with command
+```shell
+make install-kafka
+```
+7. Test Kafka cluster with commands
+```shell
+make kafka-produce
+make kafka-consume
 ```

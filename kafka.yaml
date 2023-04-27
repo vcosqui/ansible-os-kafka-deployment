@@ -1,0 +1,30 @@
+- hosts: kafka_nodes
+  become: yes
+  pre_tasks:
+    - name: Install Java 11 (OpenJDK)
+      apt:
+        pkg:
+          - openjdk-11-jre-headless
+        state: present
+        update_cache: yes
+    - name: Build hosts file
+      lineinfile:
+        dest: /etc/hosts
+        regexp: '.*{{ item }}$'
+        line: '{{ hostvars[item].ansible_host }} {{item}}'
+        state: present
+      with_items: '{{ groups["all"] }}'
+  roles:
+    - role: sleighzy.kafka
+
+- hosts: ansible
+  become: yes
+  tags: ansible
+  tasks:
+    - name: Build hosts file
+      lineinfile:
+        dest: /etc/hosts
+        regexp: '.*{{ item }}$'
+        line: '{{ hostvars[item].ansible_host }} {{item}}'
+        state: present
+      with_items: '{{ groups["kafka_nodes"] }}'
