@@ -15,6 +15,9 @@ install-zookeeper: check-env ## Installs a Zookeeper cluster in the inventory no
 	@ansible-galaxy install sleighzy.zookeeper
 	@ansible-playbook zookeeper.yaml -i hosts
 
+test-zookeeper: check-env ## Tests Zookeeper cluster status
+	@ansible zookeeper_nodes -m shell -a '{ echo "stat"; sleep 1; } | telnet localhost 2181 | grep Mode' -i hosts
+
 check-env:
 ifndef ANSIBLE_KEY_FILE
 	$(error ANSIBLE_KEY_FILE is undefined, please set it to the path where the host priv key is present)

@@ -23,3 +23,7 @@ make ping-hosts
 ```shell
 make install-zookeeper
 ```
+5. Test Zookeeper cluster status with command
+```shell
+make test-zookeeper
+```
