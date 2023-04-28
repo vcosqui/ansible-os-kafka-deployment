@@ -5,10 +5,11 @@ Install a Zookeeper and a Kafka cluster using ansible
 ## Prerequisites
 * 6 Ubuntu hosts, 3 for Zookeeper, 3 for Kafka (Tested with 18.04)
 * A ssh key to connect to the hosts
-* Ansible binaries installed (Tested with 2.12.10)
+* Make and Ansible binaries installed (Tested with 2.12.10)
 ```shell
 apt-add-repository ppa:ansible/ansible
 apt update
+apt install make
 apt install ansible
 ```
 * Kafkacat cli tool to test
