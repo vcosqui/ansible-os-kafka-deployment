@@ -1,0 +1,9 @@
+plugin:
+  azure_rm
+auth_source:
+  env
+include_vm_resource_groups:
+  - migrations
+conditional_groups:
+  kafka_nodes: "'broker' in name"
+  zookeeper_nodes: "'zk' in name"

@@ -6,21 +6,21 @@ SHELL := /bin/bash
 ANSIBLE_KEY_FILE ?= $(ANSIBLE_KEY_FILE) ## Location of hosts private key for ssh connection
 
 list-inventory: ## Lists the ansible inventory
-	@ansible-inventory --list -y -i hosts
+	@ansible-inventory -i kafka_azure_rm.yml --graph
 
 ping-hosts: check-env ## Pings all hosts in inventory to verify connectivity
-	@ansible all -m ping -i hosts
+	@ansible all -m ping -i kafka_azure_rm.yml
 
 install-zookeeper: check-env ## Installs a Zookeeper cluster in the inventory nodes
 	@ansible-galaxy install sleighzy.zookeeper
-	@ansible-playbook zookeeper.yaml -i hosts
+	@ansible-playbook zookeeper.yaml -i kafka_azure_rm.yml
 
 test-zookeeper: check-env ## Tests Zookeeper cluster status
-	@ansible zookeeper_nodes -m shell -a '{ echo "stat"; sleep 1; } | telnet localhost 2181 | grep Mode' -i hosts
+	@ansible zookeeper_nodes -m shell -a '{ echo "stat"; sleep 1; } | telnet localhost 2181 | grep Mode' -i kafka_azure_rm.yml
 
 install-kafka: check-env ## Installs a Kafka cluster in the inventory nodes
 	@ansible-galaxy install sleighzy.kafka
-	@ansible-playbook kafka.yaml -i hosts
+	@ansible-playbook kafka.yaml -i kafka_azure_rm.yml
 
 kafka-produce: ## produces one messages to `test` topic
 	@echo "test message" |  kafkacat -b kafka1 -t test -P
