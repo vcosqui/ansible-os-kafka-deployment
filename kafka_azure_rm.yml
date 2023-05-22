@@ -7,3 +7,5 @@ include_vm_resource_groups:
 conditional_groups:
   kafka_nodes: "'broker' in name"
   zookeeper_nodes: "'zk' in name"
+hostvar_expressions:
+  ansible_host: (private_ipv4_addresses) | first

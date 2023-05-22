@@ -9,12 +9,7 @@ Install a Zookeeper and a Kafka cluster using ansible
 ```shell
 apt-add-repository ppa:ansible/ansible
 apt update
-apt install make
-apt install ansible
-```
-* Kafkacat cli tool to test
-```shell
-apt install kafkacat
+apt install make ansible python3-pip kafkacat
 ```
 
 ## Instructions
